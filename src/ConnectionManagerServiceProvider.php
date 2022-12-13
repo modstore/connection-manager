@@ -2,9 +2,9 @@
 
 namespace Modstore\ConnectionManager;
 
+use Modstore\ConnectionManager\Commands\ConnectionManagerCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Modstore\ConnectionManager\Commands\ConnectionManagerCommand;
 
 class ConnectionManagerServiceProvider extends PackageServiceProvider
 {
