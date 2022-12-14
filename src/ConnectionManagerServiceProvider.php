@@ -20,6 +20,16 @@ class ConnectionManagerServiceProvider extends PackageServiceProvider
         return parent::register();
     }
 
+    public function boot()
+    {
+        // Only register this package in the local environment.
+        if (!$this->app->isLocal()) {
+            return $this;
+        }
+
+        return parent::boot();
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
