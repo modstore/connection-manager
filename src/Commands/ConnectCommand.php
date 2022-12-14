@@ -15,8 +15,21 @@ class ConnectCommand extends Command
     {
         $name = $this->argument('name');
 
-        if ($name === null) {
-            $connections = Connection::orderBy('name')->get();
+        // If name was specified, try to find and connect to that connection.
+        if ($name !== null) {
+            /** @var Connection $connection */
+            $connection = Connection::where('name', $name)->first();
+
+            if ($connection !== null) {
+                return $this->connect($connection);
+            }
+
+            $this->error('Invalid connection');
+        }
+
+        $connections = Connection::orderBy('name')->get();
+
+        do {
             $this->table(
                 ['#', 'Name', 'Details'],
                 $connections->map(fn (Connection $connection, $index) => [$index + 1, $connection->name, $connection->details]),
@@ -27,19 +40,20 @@ class ConnectCommand extends Command
             $connection = (is_numeric($numberOrName) && $connections->has($numberOrName - 1))
                 ? $connections->get($numberOrName - 1)
                 : $connections->filter(fn (Connection $connection) => $connection->name === $numberOrName)->first();
-        } else {
-            /** @var Connection $connection */
-            $connection = Connection::where('name', $name)->firstOrFail();
-        }
 
-        // TODO put this in a loop so can try again.
-        if ($connection === null) {
+            if ($connection !== null) {
+                break;
+            }
+
             $this->error('Invalid connection');
+        } while (true);
 
-            return self::FAILURE;
-        }
+        return $this->connect($connection);
+    }
 
-        $this->comment(sprintf('Connecting to %s (%s@%s)', $connection->name, $connection->user, $connection->host));
+    protected function connect(Connection $connection): int
+    {
+        $this->comment(sprintf('Connecting to %s (%s)', $connection->name, $connection->details));
 
         passthru(sprintf('ssh %s@%s', $connection->user, $connection->host));
 
