@@ -10,6 +10,16 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class ConnectionManagerServiceProvider extends PackageServiceProvider
 {
+    public function register()
+    {
+        // Only register this package in the local environment.
+        if (!$this->app->isLocal()) {
+            return $this;
+        }
+
+        return parent::register();
+    }
+
     public function configurePackage(Package $package): void
     {
         /*

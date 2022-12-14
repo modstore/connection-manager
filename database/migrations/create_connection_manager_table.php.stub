@@ -8,6 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
+        if (!\Illuminate\Support\Facades\App::isLocal()) {
+            return;
+        }
+        
         Schema::create('connection_manager_connections', function (Blueprint $table) {
             $table->id();
 

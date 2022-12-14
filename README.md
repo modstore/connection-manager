@@ -13,6 +13,8 @@ A simple way to store and connect to your project's ssh connections. E.g.
 | 2 | worker | forge@168.104.172.20 |
 ```Please select a connection (# or name):```
 
+Note that this package is only intended to be used in the local environment and won't be registered in production etc.
+
 ## Installation
 
 You can install the package via composer:
