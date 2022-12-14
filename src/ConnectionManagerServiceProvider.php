@@ -2,9 +2,10 @@
 
 namespace Modstore\ConnectionManager;
 
+use Modstore\ConnectionManager\Commands\ConnectAddCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Modstore\ConnectionManager\Commands\ConnectionManagerCommand;
+use Modstore\ConnectionManager\Commands\ConnectCommand;
 
 class ConnectionManagerServiceProvider extends PackageServiceProvider
 {
@@ -19,7 +20,8 @@ class ConnectionManagerServiceProvider extends PackageServiceProvider
             ->name('connection-manager')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_connection-manager_table')
-            ->hasCommand(ConnectionManagerCommand::class);
+            ->hasMigration('create_connection_manager_table')
+            ->hasCommand(ConnectCommand::class)
+            ->hasCommand(ConnectAddCommand::class);
     }
 }

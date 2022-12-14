@@ -8,10 +8,13 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('connection_manager_table', function (Blueprint $table) {
+        Schema::create('connection_manager_connections', function (Blueprint $table) {
             $table->id();
 
-            // add fields
+            $table->string('name', 64);
+            $table->string('user', 64);
+            $table->string('host', 128);
+            $table->string('key')->nullable();
 
             $table->timestamps();
         });
