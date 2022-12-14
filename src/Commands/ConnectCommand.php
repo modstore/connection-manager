@@ -3,6 +3,7 @@
 namespace Modstore\ConnectionManager\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Modstore\ConnectionManager\Models\Connection;
 
 class ConnectCommand extends Command
@@ -55,7 +56,14 @@ class ConnectCommand extends Command
     {
         $this->comment(sprintf('Connecting to %s (%s)', $connection->name, $connection->details));
 
-        passthru(sprintf('ssh %s@%s', $connection->user, $connection->host));
+        $command = collect(['ssh'])
+            ->when($connection->key !== null, function (Collection $collection) use ($connection) {
+                return $collection->merge([sprintf('-i %s', $connection->key)]);
+            })
+            ->merge([sprintf('%s@%s', $connection->user, $connection->host)])
+            ->implode(' ');
+
+        passthru($command);
 
         return self::SUCCESS;
     }
