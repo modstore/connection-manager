@@ -6,12 +6,14 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/modstore/connection-manager.svg?style=flat-square)](https://packagist.org/packages/modstore/connection-manager)
 
 A simple way to store and connect to your project's ssh connections. E.g.
-
+```
 | # | Name   | Details              |
 |---|--------|----------------------|
 | 1 | db     | forge@db.myhost.com  |
 | 2 | worker | forge@168.104.172.20 |
-```Please select a connection (# or name):```
+
+Please select a connection (# or name):
+```
 
 Note that this package is only intended to be used in the local environment and won't be registered in production etc.
 
