@@ -23,7 +23,7 @@ class ConnectionManagerServiceProvider extends PackageServiceProvider
     public function boot()
     {
         // Only register this package in the local environment.
-        if (!$this->app->isLocal()) {
+        if (! $this->app->isLocal()) {
             return $this;
         }
 
