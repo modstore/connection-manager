@@ -2,11 +2,10 @@
 
 namespace Modstore\ConnectionManager\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Modstore\ConnectionManager\Models\Connection;
 
-class ConnectCommand extends Command
+class ConnectCommand extends AbstractConnectCommand
 {
     public $signature = 'connect {name?}';
 
@@ -28,26 +27,7 @@ class ConnectCommand extends Command
             $this->error('Invalid connection');
         }
 
-        $connections = Connection::orderBy('name')->get();
-
-        do {
-            $this->table(
-                ['#', 'Name', 'Details'],
-                $connections->map(fn (Connection $connection, $index) => [$index + 1, $connection->name, $connection->details]),
-            );
-
-            $numberOrName = $this->ask('Please select a connection (# or name)');
-
-            $connection = (is_numeric($numberOrName) && $connections->has($numberOrName - 1))
-                ? $connections->get($numberOrName - 1)
-                : $connections->filter(fn (Connection $connection) => $connection->name === $numberOrName)->first();
-
-            if ($connection !== null) {
-                break;
-            }
-
-            $this->error('Invalid connection');
-        } while (true);
+        $connection = $this->selectConnection();
 
         return $this->connect($connection);
     }

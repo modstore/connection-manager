@@ -5,15 +5,13 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/modstore/connection-manager/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/modstore/connection-manager/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/modstore/connection-manager.svg?style=flat-square)](https://packagist.org/packages/modstore/connection-manager)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A simple way to store and connect to your project's ssh connections. E.g.
 
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/connection-manager.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/connection-manager)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+| # | Name   | Details              |
+|---|--------|----------------------|
+| 1 | db     | forge@db.myhost.com  |
+| 2 | worker | forge@168.104.172.20 |
+```Please select a connection (# or name):```
 
 ## Installation
 
@@ -30,30 +28,22 @@ php artisan vendor:publish --tag="connection-manager-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="connection-manager-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="connection-manager-views"
-```
-
 ## Usage
 
-```php
-$connectionManager = new Modstore\ConnectionManager();
-echo $connectionManager->echoPhrase('Hello, Modstore!');
+List available connections, then select the one to connect to. Optionally the name of the connection can 
+be provided to connect straight away without selecting from the list.
+```
+php artisan connect {name?}
+```
+
+Add a new connection
+```
+php artisan connect:add
+```
+
+Remove a connection
+```
+php artisan connect:remove
 ```
 
 ## Testing
