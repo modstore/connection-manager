@@ -14,7 +14,7 @@ class ConnectRemoveCommand extends AbstractConnectCommand
 
         $connection = $this->selectConnection();
 
-        if (!$this->confirm(sprintf('Are you sure you\'d like to delete connection: %s', $connection->details))) {
+        if (! $this->confirm(sprintf('Are you sure you\'d like to delete connection: %s', $connection->details))) {
             return self::FAILURE;
         }
 
