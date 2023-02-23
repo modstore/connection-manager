@@ -1,8 +1,6 @@
 # Manage connections to your servers
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/modstore/connection-manager.svg?style=flat-square)](https://packagist.org/packages/modstore/connection-manager)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/modstore/connection-manager/run-tests?label=tests)](https://github.com/modstore/connection-manager/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/modstore/connection-manager/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/modstore/connection-manager/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/modstore/connection-manager.svg?style=flat-square)](https://packagist.org/packages/modstore/connection-manager)
 
 A simple way to store and connect to your project's ssh connections. E.g.
