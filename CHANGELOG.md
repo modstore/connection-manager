@@ -2,6 +2,10 @@
 
 All notable changes to `connection-manager` will be documented in this file.
 
+## 1.0.4 - 2025-06-29
+
+Support Laravel 12
+
 ## 1.0.3 - 2024-05-21
 
 Support Laravel 11.
